@@ -1,12 +1,14 @@
-from contextlib import asynccontextmanager
 import logging
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from app.config.database import setup_db, database
+from app.config.database import database, setup_db
 from app.config.logging_conf import configure_logging
+from app.config.database import database
 
 logger = logging.getLogger(__name__)
+
 
 @asynccontextmanager
 async def db_lifespan(application: FastAPI):

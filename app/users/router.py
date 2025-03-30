@@ -1,6 +1,5 @@
 from fastapi import APIRouter, status
 
-
 users_router = APIRouter()
 
 

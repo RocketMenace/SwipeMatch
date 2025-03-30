@@ -1,5 +1,6 @@
 from logging.config import dictConfig
-from app.config.settings import config, DevConfig
+
+from app.config.settings import DevConfig, config
 
 
 def configure_logging() -> None:
@@ -23,10 +24,12 @@ def configure_logging() -> None:
             },
             "loggers": {
                 "app": {
-                    "handlers": ["default", ],
+                    "handlers": [
+                        "default",
+                    ],
                     "level": "DEBUG" if isinstance(config, DevConfig) else "INFO",
-                    "propagate": False
+                    "propagate": False,
                 }
-            }
+            },
         }
     )

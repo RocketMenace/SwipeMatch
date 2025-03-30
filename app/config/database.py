@@ -73,6 +73,6 @@ database = Database()
 
 
 async def setup_db():
-    await database.create_db("social_app")
+    await database.create_db("swipematch")
     await database.ping_db()
     await database.create_tables()

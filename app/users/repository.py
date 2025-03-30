@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
-class BaseRepository(ABC):
 
+class BaseRepository(ABC):
     @abstractmethod
     async def create(self):
         raise NotImplementedError
@@ -21,4 +21,3 @@ class BaseRepository(ABC):
     @abstractmethod
     async def get_all(self):
         raise NotImplementedError
-
