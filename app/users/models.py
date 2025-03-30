@@ -44,3 +44,6 @@ class Preferences(database.Base):
     sex: Mapped[str] = mapped_column(String(length=50), nullable=False)
     age_from: Mapped[int] = mapped_column(Integer)
     age_to: Mapped[int] = mapped_column(Integer)
+
+    def __repr__(self):
+        return f"{self.id} {self.sex}"
