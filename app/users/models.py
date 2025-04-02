@@ -6,6 +6,8 @@ from app.config.database import database
 
 
 class UserInterest(database.Base):
+    """Association table for users and interests."""
+
     __tablename__ = "user_interests"
     id: Mapped[int] = mapped_column(primary_key=True, index=True, autoincrement=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), primary_key=True)
@@ -26,7 +28,7 @@ class User(database.Base):
     last_name: Mapped[str] = mapped_column(String(length=50), nullable=False)
     city: Mapped[str] = mapped_column(String(length=50), nullable=False)
     interests: Mapped[list["UserInterest"]] = relationship(
-        back_populates="user", secondary=UserInterest
+        back_populates="user", secondary="user_interests"
     )
     preferences: Mapped["Preferences"] = relationship(
         back_populates="user", uselist=False, cascade="all, delete-orphan"
@@ -44,8 +46,8 @@ class Interest(database.Base):
     __tablename__ = "interests"
     id: Mapped[int] = mapped_column(primary_key=True, index=True, autoincrement=True)
     name: Mapped[str] = mapped_column(String(length=50), nullable=False)
-    users: Mapped[list["User"]] = relationship(
-        back_populates="interest", secondary=UserInterest
+    users: Mapped[list["UserInterest"]] = relationship(
+        back_populates="interest", secondary="user_interests"
     )
 
     def __repr__(self):
