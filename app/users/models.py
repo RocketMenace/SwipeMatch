@@ -5,6 +5,17 @@ from datetime import date, datetime, timezone
 from app.config.database import database
 
 
+class UserInterest(database.Base):
+    __tablename__ = "user_interests"
+    id: Mapped[int] = mapped_column(primary_key=True, index=True, autoincrement=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), primary_key=True)
+    interest_id: Mapped[int] = mapped_column(
+        ForeignKey("interests.id"), primary_key=True
+    )
+    user: Mapped["User"] = relationship(back_populates="user_interests")
+    interest: Mapped["Interest"] = relationship(back_populates="interests_user")
+
+
 class User(database.Base):
     __tablename__ = "users"
     id: Mapped[int] = mapped_column(
@@ -14,7 +25,9 @@ class User(database.Base):
     first_name: Mapped[str] = mapped_column(String(length=50), nullable=False)
     last_name: Mapped[str] = mapped_column(String(length=50), nullable=False)
     city: Mapped[str] = mapped_column(String(length=50), nullable=False)
-    interests: Mapped[list["Interests"]] = relationship(back_populates="user")
+    interests: Mapped[list["UserInterest"]] = relationship(
+        back_populates="user", secondary=UserInterest
+    )
     preferences: Mapped["Preferences"] = relationship(
         back_populates="user", uselist=False, cascade="all, delete-orphan"
     )
@@ -27,10 +40,13 @@ class User(database.Base):
         return f"{self.first_name} {self.last_name} {self.email}"
 
 
-class Interests(database.Base):
+class Interest(database.Base):
     __tablename__ = "interests"
     id: Mapped[int] = mapped_column(primary_key=True, index=True, autoincrement=True)
     name: Mapped[str] = mapped_column(String(length=50), nullable=False)
+    users: Mapped[list["User"]] = relationship(
+        back_populates="interest", secondary=UserInterest
+    )
 
     def __repr__(self):
         return f"{self.id} {self.name}"
