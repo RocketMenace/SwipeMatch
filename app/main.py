@@ -5,7 +5,6 @@ from fastapi import FastAPI
 
 from app.config.database import database, setup_db
 from app.config.logging_conf import configure_logging
-from app.config.database import database
 from app.users.router import users_router
 
 logger = logging.getLogger(__name__)

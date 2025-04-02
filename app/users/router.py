@@ -1,7 +1,7 @@
 from fastapi import APIRouter, status
 from sqlalchemy.sql.annotation import Annotated
 
-from app.users.schemas import UserIn, User
+from app.users.schemas import User, UserIn
 
 users_router = APIRouter()
 

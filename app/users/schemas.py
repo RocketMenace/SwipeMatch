@@ -2,11 +2,33 @@ from datetime import date
 
 from pydantic import BaseModel, EmailStr
 
-class Interest(BaseModel):
+
+class InterestBase(BaseModel):
+    name: str
+
+
+class InterestIn(InterestBase):
     pass
 
-class Preference(BaseModel):
+
+class Interest(InterestBase):
+    id: int
+
+
+class PreferenceBase(BaseModel):
+    user_id: int
+    sex: str
+    age_from: int
+    age_to: int
+
+
+class PreferenceIn(PreferenceBase):
     pass
+
+
+class Preference(PreferenceBase):
+    id: int
+
 
 class UserBase(BaseModel):
     first_name: str
@@ -25,5 +47,3 @@ class UserIn(UserBase):
 
 class User(UserBase):
     id: int
-    pass
-
