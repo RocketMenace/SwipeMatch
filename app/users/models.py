@@ -38,6 +38,7 @@ class User(database.Base):
         DateTime(), default=datetime.now(tz=timezone.utc)
     )
     birthday: Mapped[date] = mapped_column(Date(), nullable=False)
+    password: Mapped[str] = mapped_column(String(length=50), nullable=False)
 
     def __repr__(self):
         return f"{self.first_name} {self.last_name} {self.email}"
