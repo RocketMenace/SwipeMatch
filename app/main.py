@@ -3,9 +3,9 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
+from app.api.endpoints.user import router
 from app.config.database import database, setup_db
 from app.config.logging_conf import configure_logging
-from app.users.router import users_router
 
 logger = logging.getLogger(__name__)
 
@@ -19,3 +19,5 @@ async def db_lifespan(application: FastAPI):
 
 
 app = FastAPI(title="SwipeMatch API", lifespan=db_lifespan, root_path="/api")
+
+app.include_router(router)

@@ -1,6 +1,6 @@
 from datetime import date
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, ConfigDict
 
 
 class InterestBase(BaseModel):
@@ -12,6 +12,7 @@ class InterestIn(InterestBase):
 
 
 class Interest(InterestBase):
+    model_config = ConfigDict(from_attributes=True)
     id: int
 
 
@@ -27,6 +28,7 @@ class PreferenceIn(PreferenceBase):
 
 
 class Preference(PreferenceBase):
+    model_config = ConfigDict(from_attributes=True)
     id: int
 
 
@@ -36,8 +38,8 @@ class UserBase(BaseModel):
     birthdate: date  #  Need validation for user's ages over 18
     email: EmailStr
     city: str
-    interests: list[Interest]
-    preferences: Preference
+    interests: list[InterestIn]
+    preferences: PreferenceIn
 
 
 class UserIn(UserBase):
@@ -46,4 +48,5 @@ class UserIn(UserBase):
 
 
 class User(UserBase):
+    model_config = ConfigDict(from_attributes=True)
     id: int

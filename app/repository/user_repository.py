@@ -1,9 +1,8 @@
-from typing import AnyStr, Any
+from typing import Any, AnyStr
 
-from app.repository.base_repository import BaseRepository
 from app.core.dependencies import SessionDep
-from app.schemas.user_schemas import UserIn
 from app.models.user_models import User
+from app.repository.base_repository import BaseRepository
 
 
 class UserRepository(BaseRepository):
