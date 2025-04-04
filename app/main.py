@@ -19,5 +19,3 @@ async def db_lifespan(application: FastAPI):
 
 
 app = FastAPI(title="SwipeMatch API", lifespan=db_lifespan, root_path="/api")
-
-app.include_router(users_router, prefix="/users", tags=["Users"])
