@@ -11,7 +11,9 @@ DBModel = TypeVar("DBModel", bound=database.Base)
 
 class BaseRepository:
     def __init__(
-        self, session: Annotated[AsyncSession, Depends(database.get_session)], model: DBModel
+        self,
+        session: Annotated[AsyncSession, Depends(database.get_session)],
+        model: DBModel,
     ):
         self.session = session
         self.model = model
