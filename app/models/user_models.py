@@ -47,7 +47,7 @@ class User(database.Base):
 class Interest(database.Base):
     __tablename__ = "interests"
     id: Mapped[int] = mapped_column(primary_key=True, index=True, autoincrement=True)
-    name: Mapped[str] = mapped_column(String(length=50), nullable=False)
+    name: Mapped[str] = mapped_column(String(length=50), nullable=False, unique=True)
     users: Mapped[list["UserInterest"]] = relationship(
         back_populates="interest", secondary="user_interests"
     )
