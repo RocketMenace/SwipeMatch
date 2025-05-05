@@ -2,7 +2,7 @@ import logging
 
 from fastapi import FastAPI
 
-from app.api.endpoints import user
+from app.api.endpoints import interest, preference, user
 
 # logger = logging.getLogger(__name__)
 
@@ -10,3 +10,5 @@ from app.api.endpoints import user
 app = FastAPI(title="Users Service API", root_path="/users")
 
 app.include_router(user.router)
+app.include_router(interest.router)
+app.include_router(preference.router)

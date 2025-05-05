@@ -1,10 +1,13 @@
 from datetime import date
 
-from pydantic import BaseModel, ConfigDict, EmailStr
+from pydantic import BaseModel, ConfigDict, EmailStr, Field
+
+from app.validators.user import BirthdateValidator
 
 
 class InterestBase(BaseModel):
     name: str
+    user_id: int
 
 
 class InterestIn(InterestBase):
@@ -33,11 +36,28 @@ class Preference(PreferenceBase):
 
 
 class UserBase(BaseModel):
-    first_name: str
-    last_name: str
-    birthdate: date  #  Need validation for user's ages over 18
+    first_name: str = Field(description="User's first name")
+    last_name: str = Field(
+        description="User's last name.",
+    )
+    birthdate: BirthdateValidator  #  Need validation for user's ages over 18
     email: EmailStr
     city: str
+    model_config = ConfigDict(
+        json_schema_extra={
+            "examples": [
+                {
+                    "first_name": "Ryan",
+                    "last_name": "Gosling",
+                    "birthdate": "1995-08-13",
+                    "email": "gosling@gmail.com",
+                    "city": "Moscow",
+                    "password": "secretpassword",
+                    "repeat_password": "secretpassword",
+                }
+            ]
+        }
+    )
 
 
 class UserIn(UserBase):
