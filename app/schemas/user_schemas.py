@@ -1,8 +1,9 @@
 from datetime import date
 
-from pydantic import BaseModel, ConfigDict, EmailStr, Field
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, model_validator
 
 from app.validators.user import BirthdateValidator
+from app.config.exceptions import ValidationError
 
 
 class InterestBase(BaseModel):
@@ -63,6 +64,11 @@ class UserBase(BaseModel):
 class UserIn(UserBase):
     password: str
     repeat_password: str
+
+    @model_validator(mode="after")
+    def check_password_match(self):
+        if self.password != self.repeat_password:
+            raise ValidationError
 
 
 class User(UserBase):
