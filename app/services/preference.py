@@ -1,6 +1,8 @@
-from app.repository.preference import PreferenceRepository
 from typing import Annotated, Any
+
 from fastapi import Depends
+
+from app.repository.preference import PreferenceRepository
 from app.schemas.user_schemas import PreferenceIn
 
 

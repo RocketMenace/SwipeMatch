@@ -7,6 +7,6 @@ from app.api.endpoints import user
 # logger = logging.getLogger(__name__)
 
 
-app = FastAPI(title="SwipeMatch API", root_path="/api")
+app = FastAPI(title="Users Service API", root_path="/users")
 
 app.include_router(user.router)
