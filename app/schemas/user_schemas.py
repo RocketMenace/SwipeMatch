@@ -38,8 +38,6 @@ class UserBase(BaseModel):
     birthdate: date  #  Need validation for user's ages over 18
     email: EmailStr
     city: str
-    interests: list[InterestIn]
-    preferences: PreferenceIn
 
 
 class UserIn(UserBase):
