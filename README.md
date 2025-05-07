@@ -1,1 +1,1 @@
-# SwipeMatch
+# SwipeMatch 1.0.0
