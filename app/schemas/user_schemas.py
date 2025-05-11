@@ -88,6 +88,7 @@ class UserIn(UserBase):
     def check_password_match(self):
         if self.password != self.repeat_password:
             raise ValidationError
+        return self
 
 
 class User(UserBase):

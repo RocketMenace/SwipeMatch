@@ -3,6 +3,7 @@ from datetime import date, datetime
 from typing import Annotated
 
 from pydantic import AfterValidator, ValidationError
+
 from app.config.exceptions import InvalidPasswordPatternError
 
 
