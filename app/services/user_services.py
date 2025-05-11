@@ -11,6 +11,5 @@ class UserService:
         self.repository = repository
 
     async def add_user(self, data: UserIn) -> dict[str, Any]:
-        print(data, "&&&&&&&&&&&")
         user_data = data.model_dump()
         return await self.repository.add_one(data=user_data)

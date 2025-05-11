@@ -23,4 +23,4 @@ class BaseRepository:
             async with session.begin():
                 stmt = insert(self.model).values(data).returning(self.model)
                 result = await session.execute(stmt)
-                return result.scalar()
+                return result.scalar_one().__dict__

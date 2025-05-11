@@ -56,10 +56,8 @@ class Preference(PreferenceBase):
 
 
 class UserBase(BaseModel):
-    first_name: str = Field(description="User's first name")
-    last_name: str = Field(
-        description="User's last name.",
-    )
+    first_name: str
+    last_name: str
     birthdate: BirthdateValidator
     email: EmailStr
     city: str
@@ -82,7 +80,7 @@ class UserBase(BaseModel):
 
 class UserIn(UserBase):
     password: PasswordPatternValidator
-    repeat_password: str
+    repeat_password: str = Field(exclude=True)
 
     @model_validator(mode="after")
     def check_password_match(self):
@@ -92,5 +90,5 @@ class UserIn(UserBase):
 
 
 class User(UserBase):
-    model_config = ConfigDict(from_attributes=True)
     id: int
+    model_config = ConfigDict(from_attributes=True)

@@ -41,9 +41,7 @@ class User(database.Base):
     preferences: Mapped["Preferences"] = relationship(
         back_populates="user", uselist=False, cascade="all, delete-orphan"
     )
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime(), default=datetime.now(tz=timezone.utc)
-    )
+    created_at: Mapped[datetime] = mapped_column(DateTime(), default=datetime.now())
     birthdate: Mapped[date] = mapped_column(Date(), nullable=False)
     password: Mapped[str] = mapped_column(String(length=50), nullable=False)
 
