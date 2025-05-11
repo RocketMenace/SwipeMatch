@@ -1,13 +1,32 @@
 from datetime import date
+from enum import Enum
 
 from pydantic import BaseModel, ConfigDict, EmailStr, Field, model_validator
 
-from app.validators.user import BirthdateValidator
 from app.config.exceptions import ValidationError
+from app.validators.user import BirthdateValidator, PasswordPatternValidator
+
+
+class Interests(str, Enum):
+    HIKING = "Hiking"
+    PHOTOGRAPHY = "Photography"
+    COOKING = "Cooking"
+    READING = "Reading"
+    GAMING = "Gaming"
+    TRAVEL = "Travel"
+    YOGA = "Yoga"
+    MUSIC = "Music"
+    PAINTING = "Painting"
+    CYCLING = "Cycling"
+    DANCING = "Dancing"
+    CHESS = "Chess"
+    ASTRONOMY = "Astronomy"
+    FISHING = "Fishing"
+    PROGRAMMING = "Programming"
 
 
 class InterestBase(BaseModel):
-    name: str
+    name: Interests
     user_id: int
 
 
@@ -41,7 +60,7 @@ class UserBase(BaseModel):
     last_name: str = Field(
         description="User's last name.",
     )
-    birthdate: BirthdateValidator  #  Need validation for user's ages over 18
+    birthdate: BirthdateValidator
     email: EmailStr
     city: str
     model_config = ConfigDict(
@@ -53,8 +72,8 @@ class UserBase(BaseModel):
                     "birthdate": "1995-08-13",
                     "email": "gosling@gmail.com",
                     "city": "Moscow",
-                    "password": "secretpassword",
-                    "repeat_password": "secretpassword",
+                    "password": "secret password",
+                    "repeat_password": "secret password",
                 }
             ]
         }
@@ -62,7 +81,7 @@ class UserBase(BaseModel):
 
 
 class UserIn(UserBase):
-    password: str
+    password: PasswordPatternValidator
     repeat_password: str
 
     @model_validator(mode="after")

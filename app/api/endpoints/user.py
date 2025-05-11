@@ -15,4 +15,4 @@ router = APIRouter(prefix="", tags=["Users"])
     summary="Create user profile.",
 )
 async def create_user(data: UserIn, service: Annotated[UserService, Depends()]):
-    return await service.add_user(data)
+    return await service.add_user(data=data)

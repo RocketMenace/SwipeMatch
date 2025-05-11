@@ -1,5 +1,6 @@
-from fastapi import HTTPException, status
 from typing import Any
+
+from fastapi import HTTPException, status
 
 
 class DetailedHTTPException(HTTPException):
@@ -16,4 +17,14 @@ class BadRequest(DetailedHTTPException):
 
 
 class ValidationError(BadRequest):
+    STATUS_CODE = status.HTTP_400_BAD_REQUEST
     DETAIL = "Passwords do not match."
+
+
+class InvalidPasswordPatternError(BadRequest):
+    STATUS_CODE = status.HTTP_400_BAD_REQUEST
+    DETAIL = """Password must contain: 
+            At least eight characters
+            Only Latin letters
+            At least 1 uppercase letter
+            At least 1 special character: $ % & ! : """
