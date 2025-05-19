@@ -21,3 +21,7 @@ def get_preference_repository(
     return PreferenceRepository(session=session)
 
 
+def get_interest_repository(
+    session: Annotated[AsyncSession, Depends(database.get_session)],
+):
+    return InterestRepository(session=session)
