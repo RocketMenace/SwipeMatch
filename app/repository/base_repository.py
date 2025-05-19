@@ -12,7 +12,7 @@ DBModel = TypeVar("DBModel", bound=database.Base)
 class BaseRepository:
     def __init__(
         self,
-        session: Annotated[AsyncSession, Depends(database.get_session)],
+        session: AsyncSession,
         model: DBModel,
     ):
         self.session = session

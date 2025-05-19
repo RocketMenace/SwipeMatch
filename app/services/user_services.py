@@ -7,7 +7,7 @@ from app.schemas.user_schemas import UserIn
 
 
 class UserService:
-    def __init__(self, repository: Annotated[UserRepository, Depends()]):
+    def __init__(self, repository: UserRepository):
         self.repository = repository
 
     async def add_user(self, data: UserIn) -> dict[str, Any]:
